@@ -5,9 +5,7 @@
 The following table lists the keyboard shortcuts for editing CLI commands. "Ctrl-" indicates that you press and hold the Ctrl key while typing the character specified after it. "Esc-" indicates that you press and release the Esc key and then type the character specified after it.**
 
 ## keyboard shortcuts
-|If you want to… |Use the following keyboard shortcut…|
 
-## Assumptions
 |If you want to… |Use the following keyboard shortcut…|
 |----|----|
 |Master|k8s-master|
