@@ -1,4 +1,4 @@
-#Keyboard shortcuts for editing CLI commands
+#   Keyboard shortcuts for editing CLI commands
 
 The command at the current command prompt is the active command. Using keyboard shortcuts enables you to edit the active command quickly. These keyboard shortcuts are similar to those of the UNIX tcsh shell and the Emacs editor.
 
