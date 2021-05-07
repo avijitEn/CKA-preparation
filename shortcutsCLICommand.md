@@ -1,10 +1,10 @@
 #   Keyboard shortcuts for editing CLI commands
 
 # The command at the current command prompt is the active command. Using keyboard shortcuts enables you to edit the active command quickly. These keyboard shortcuts are similar to those of the UNIX tcsh shell and the Emacs editor.
-```
+<br/>
 The following table lists the keyboard shortcuts for editing CLI commands. "Ctrl-" indicates that you press and hold the Ctrl key while typing the character specified after it. "Esc-" indicates that you press and release the Esc key and then type the character specified after it.
 If you want to… 	Use the following keyboard shortcut…
-```
+<br/>
 Move the cursor back by one character 	Ctrl-B
 Back arrow
 Move the cursor forward by one character 	Ctrl-F
