@@ -6,6 +6,12 @@ The following table lists the keyboard shortcuts for editing CLI commands. "Ctrl
 
 ## keyboard shortcuts
 |If you want to… |Use the following keyboard shortcut…|
+
+## Assumptions
+|Role|FQDN|IP|OS|RAM|CPU|
+|----|----|----|----|----|----|
+|Master|k8s-master|192.168.50.10|Ubuntu 20.04|2G|2|
+|Worker|node-1|192.168.50.11|Ubuntu 20.04|1G|1|
 	
 
 Move the cursor back by one character 	Ctrl-B
