@@ -8,8 +8,6 @@ The following table lists the keyboard shortcuts for editing CLI commands. "Ctrl
 
 |If you want to… |Use the following keyboard shortcut…|
 |----|----|
-|Master|k8s-master|
-|Worker|node-1|
 |Move the cursor back by one character|Ctrl-B Back arrow|
 |Move the cursor forward by one character|Ctrl-F Forward arrow|
 |Move the cursor back by one word|Esc-B|
