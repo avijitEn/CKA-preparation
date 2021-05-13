@@ -146,7 +146,7 @@ kube-controller-manager --master=http://localhost:8080 or kube-controller-manage
   
 ```
 
-### kube-controller-manager describtion
+### kube-controller-manager description
 ```
 now if you run kubectl get all you can see deployment and ReplicaSet created but no POD created that mean  kube-controller-manager has create deployment and ReplicaSet correctly and check the log of kube-controller-manager you can see service account faild log reflelct it 
 
@@ -187,7 +187,7 @@ start  kube-scheduler
   
 ```
 
-###  kube-scheduler describtion
+###  kube-scheduler description
 ```
 now if you run kubectl get all you can see deployment and ReplicaSet created but  POD still pending state because of no Node register yet by checking command kubectl get node that mean  you have to install kubelet and container runtime 
 let install the docker and kubelet 
