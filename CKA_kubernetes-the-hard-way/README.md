@@ -146,7 +146,7 @@ kube-controller-manager --master=http://localhost:8080 or kube-controller-manage
   
 ```
 
-### kube-controller-manager
+### kube-controller-manager describtion
 ```
 now if you run kubectl get all you can see deployment and ReplicaSet created but no POD created that mean  kube-controller-manager has create deployment and ReplicaSet correctly and check the log of kube-controller-manager you can see service account faild log reflelct it 
 
@@ -161,3 +161,36 @@ wait for sometime POD has created now  and it will show pending state let invest
 
 
 ```
+
+### Configure the kube-scheduler
+
+```
+run command kube-scheduler 
+
+root@instance-1:~# kube-scheduler
+I0513 11:29:24.012148   27400 registry.go:173] Registering SelectorSpread plugin
+I0513 11:29:24.012375   27400 registry.go:173] Registering SelectorSpread plugin
+I0513 11:29:24.899716   27400 serving.go:331] Generated self-signed cert in-memory
+W0513 11:29:25.162542   27400 authentication.go:265] No authentication-kubeconfig provided in order to lookup client-ca-file in configmap/extension-apiserver-authentication in kube-system, so client certificate authentication won't work.
+W0513 11:29:25.162796   27400 authentication.go:289] No authentication-kubeconfig provided in order to lookup requestheader-client-ca-file in configmap/extension-apiserver-authentication in kube-system, so request-header client certificate authentication won't work.
+W0513 11:29:25.162928   27400 authorization.go:146] No authorization-kubeconfig provided, so SubjectAccessReview of authorization tokens won't work.
+W0513 11:29:25.163025   27400 options.go:334] Neither --kubeconfig nor --master was specified. Using default API client. This might not work.
+invalid configuration: no configuration has been provided, try setting KUBERNETES_MASTER environment variable
+
+
+if you see the above logs it a clearly --master required to run  kube-scheduler
+
+start  kube-scheduler
+ kube-scheduler --master=http://localhost:8080 or  kube-scheduler --master=localhost:8080
+
+
+  
+```
+
+###  kube-scheduler describtion
+```
+now if you run kubectl get all you can see deployment and ReplicaSet created but  POD still pending state because of no Node register yet by checking command kubectl get node that mean  you have to install kubelet and container runtime 
+let install the docker and kubelet 
+
+```
+
