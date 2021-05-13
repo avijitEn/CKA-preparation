@@ -36,7 +36,11 @@ sudo etcd
 ### bind log etcd Server
 
 ```
- I | etcdmain: Go Version: go1.12.17
+ root@instance-1:~# etcd
+[WARNING] Deprecated '--logger=capnslog' flag is set; use '--logger=zap' flag instead
+2021-05-13 11:26:45.254665 I | etcdmain: etcd Version: 3.4.15
+2021-05-13 11:26:45.254851 I | etcdmain: Git SHA: aa7126864
+2021-05-13 11:26:45.254947 I | etcdmain: Go Version: go1.12.17
 2021-05-13 11:26:45.255034 I | etcdmain: Go OS/Arch: linux/amd64
 2021-05-13 11:26:45.255131 I | etcdmain: setting maximum number of CPUs to 1, total number of available CPUs is 1
 2021-05-13 11:26:45.255240 W | etcdmain: no data-dir provided, using default data-dir ./default.etcd
@@ -73,5 +77,5 @@ raft2021/05/13 11:26:46 INFO: raft.node: 8e9e05c52164694d elected leader 8e9e05c
 2021-05-13 11:26:46.332851 N | embed: serving insecure client requests on 127.0.0.1:2379, this is strongly discouraged!
 2021-05-13 11:27:28.282328 I | mvcc: store.index: compact 9809
 2021-05-13 11:27:28.283434 I | mvcc: finished scheduled compaction at 9809 (took 843.584µs)
-  
+
 ```
