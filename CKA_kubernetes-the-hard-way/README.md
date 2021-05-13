@@ -224,7 +224,7 @@ systemctl daemon-reload
 systemctl restart docker
 ```
 
-### Configure the kubelet
+### Configure the kubelet Download and Install the etcd Binaries
 ```
 Download the official Kubernetes release binaries:
 wget -q --show-progress --https-only --timestamping \
@@ -245,4 +245,20 @@ Install the kubelet binaries:
   chmod +x kubelet  kube-proxy
   sudo mv kubelet  kube-proxy /usr/local/bin/
 }
+```
+
+### Configure the kubelet 
+```
+kubelet command required to additinal flag --kubeconfig file follwing the step to generate the kubeconfig file 
+
+```
+### kubeconfig file Generation
+
+```
+kubectl config set-cluster kubernetes-the-hard-way --server=http://localhost:8080 --kubeconfig=kubelet.kubeconfig
+
+kubectl config set-context default --cluster=kubernetes-the-hard-way --user=system:node:instance-1 --kubeconfig=kubelet.kubeconfig
+
+kubectl config use-context default --kubeconfig=kubelet.kubeconfig
+
 ```
