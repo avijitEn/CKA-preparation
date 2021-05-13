@@ -111,3 +111,15 @@ now kube-api server bind with http port 8080 by using below command
 netstat -natulp|grep LISTEN
 ** Note only used http port 8080 , https port 6443 not work due to ssl certification 
 ```
+### kupe-api server description 
+```
+now if you run kubectl get all you can see kube-apiserver response correctly that mean kube-apiserver working fine 
+
+let create the deployment object 
+kubectl create deploy nginx --image=nginx:alpine --replicas=3
+
+now check the resource , you will not find the resource because kube-controller-manager not deploy yet lets deploy   kube-controller-manager
+kubectl get all command 
+
+
+```
