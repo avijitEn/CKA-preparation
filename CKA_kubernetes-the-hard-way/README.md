@@ -119,7 +119,7 @@ let create the deployment object
 kubectl create deploy nginx --image=nginx:alpine --replicas=3
 
 now check the resource , you will not find the resource because kube-controller-manager not deploy yet lets deploy   kube-controller-manager
-kubectl get all command 
+
 
 
 ```
