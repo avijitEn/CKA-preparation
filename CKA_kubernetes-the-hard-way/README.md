@@ -292,6 +292,6 @@ root@instance-1:~# iptables -L -n -v -t nat|grep nginx
     1    60 KUBE-SVC-2CMXP7HKUVJN7L6M  tcp  --  *      *       0.0.0.0/0            10.0.0.120           /* default/nginx cluster IP */ tcp dpt:80
     1    60 KUBE-SEP-JYRFZRKFGSU6GYGO  all  --  *      *       0.0.0.0/0            0.0.0.0/0            /* default/nginx */
 root@instance-1:~#
-![image](https://user-images.githubusercontent.com/59084432/118130205-bf813f00-b41a-11eb-80c4-f46b956332c2.png)
+
 
 ```
