@@ -30,6 +30,48 @@ Extract and install the `etcd` server and the `etcdctl` command line utility:
 
 ```
 run command to start etcd daemon
-  sudo etcd
+sudo etcd
+  
+```
+### bind log etcd Server
+
+```
+ I | etcdmain: Go Version: go1.12.17
+2021-05-13 11:26:45.255034 I | etcdmain: Go OS/Arch: linux/amd64
+2021-05-13 11:26:45.255131 I | etcdmain: setting maximum number of CPUs to 1, total number of available CPUs is 1
+2021-05-13 11:26:45.255240 W | etcdmain: no data-dir provided, using default data-dir ./default.etcd
+2021-05-13 11:26:45.255404 N | etcdmain: the server is already initialized as member before, starting as etcd member...
+[WARNING] Deprecated '--logger=capnslog' flag is set; use '--logger=zap' flag instead
+2021-05-13 11:26:45.255972 I | embed: name = default
+2021-05-13 11:26:45.256086 I | embed: data dir = default.etcd
+2021-05-13 11:26:45.256183 I | embed: member dir = default.etcd/member
+2021-05-13 11:26:45.256273 I | embed: heartbeat = 100ms
+2021-05-13 11:26:45.256359 I | embed: election = 1000ms
+2021-05-13 11:26:45.256452 I | embed: snapshot count = 100000
+2021-05-13 11:26:45.256543 I | embed: advertise client URLs = http://localhost:2379
+2021-05-13 11:26:45.256635 I | embed: initial advertise peer URLs = http://localhost:2380
+2021-05-13 11:26:45.256734 I | embed: initial cluster =
+2021-05-13 11:26:45.325766 I | etcdserver: restarting member 8e9e05c52164694d in cluster cdf818194e3a8c32 at commit index 11177
+raft2021/05/13 11:26:45 INFO: 8e9e05c52164694d switched to configuration voters=()
+raft2021/05/13 11:26:45 INFO: 8e9e05c52164694d became follower at term 4
+raft2021/05/13 11:26:45 INFO: newRaft 8e9e05c52164694d [peers: [], term: 4, commit: 11177, applied: 0, lastindex: 11177, lastterm: 4]
+2021-05-13 11:26:45.329270 W | auth: simple token is not cryptographically signed
+2021-05-13 11:26:45.330831 I | mvcc: restore compact to 9146
+2021-05-13 11:26:45.335469 I | etcdserver: starting server... [version: 3.4.15, cluster version: to_be_decided]
+2021-05-13 11:26:45.337770 I | embed: listening for peers on 127.0.0.1:2380
+raft2021/05/13 11:26:45 INFO: 8e9e05c52164694d switched to configuration voters=(10276657743932975437)
+2021-05-13 11:26:45.338251 I | etcdserver/membership: added member 8e9e05c52164694d [http://localhost:2380] to cluster cdf818194e3a8c32
+2021-05-13 11:26:45.338405 N | etcdserver/membership: set the initial cluster version to 3.4
+2021-05-13 11:26:45.338521 I | etcdserver/api: enabled capabilities for version 3.4
+raft2021/05/13 11:26:46 INFO: 8e9e05c52164694d is starting a new election at term 4
+raft2021/05/13 11:26:46 INFO: 8e9e05c52164694d became candidate at term 5
+raft2021/05/13 11:26:46 INFO: 8e9e05c52164694d received MsgVoteResp from 8e9e05c52164694d at term 5
+raft2021/05/13 11:26:46 INFO: 8e9e05c52164694d became leader at term 5
+raft2021/05/13 11:26:46 INFO: raft.node: 8e9e05c52164694d elected leader 8e9e05c52164694d at term 5
+2021-05-13 11:26:46.331683 I | etcdserver: published {Name:default ClientURLs:[http://localhost:2379]} to cluster cdf818194e3a8c32
+2021-05-13 11:26:46.332033 I | embed: ready to serve client requests
+2021-05-13 11:26:46.332851 N | embed: serving insecure client requests on 127.0.0.1:2379, this is strongly discouraged!
+2021-05-13 11:27:28.282328 I | mvcc: store.index: compact 9809
+2021-05-13 11:27:28.283434 I | mvcc: finished scheduled compaction at 9809 (took 843.584µs)
   
 ```
