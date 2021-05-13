@@ -150,9 +150,6 @@ kube-controller-manager --master=http://localhost:8080 or kube-controller-manage
 ```
 now if you run kubectl get all you can see deployment and ReplicaSet created but no POD created that mean  kube-controller-manager has create deployment and ReplicaSet correctly and check the log of kube-controller-manager you can see service account faild log reflelct it 
 
-let create the deployment object 
-kubectl create deploy nginx --image=nginx:alpine --replicas=3
-
 now check the resource , you will not find the resource because kube-controller-manager not deploy yet lets deploy   kube-controller-manager
 if you check kube-apiserver command flag --disable-admission-plugins strings by default enable , we have set trun it off by edit service account flag add  automountServiceAccountToken: false
 
@@ -160,6 +157,7 @@ kubectl edit sa default
 
 add the line automountServiceAccountToken: false
 and save it 
-wait for sometime POD has created now  and it will show pending state 
+wait for sometime POD has created now  and it will show pending state let investigate kube-scheduler now because POD placement task done by kube-scheduler
+
 
 ```
