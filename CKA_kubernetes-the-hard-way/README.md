@@ -278,4 +278,20 @@ kubectl expose deploy nginx --port 80
 now test curl <POD iP > working but curl not work service ip due to kube-proxy yet started lets start the kube-proxy
 ```
 
+### Configure the kube-proxy
+```
+kube-proxy --master=http://localhost:8080 or  kube-scheduler --master=localhost:8080
 
+```
+### kube-proxy description 
+```
+now if you look for curl of service ip its a working and also check iptables rule has added
+root@instance-1:~# iptables -L -n -v -t nat|grep nginx
+    0     0 KUBE-MARK-MASQ  all  --  *      *       172.17.0.2           0.0.0.0/0            /* default/nginx */
+    1    60 DNAT       tcp  --  *      *       0.0.0.0/0            0.0.0.0/0            /* default/nginx */ tcp to:172.17.0.2:80
+    1    60 KUBE-SVC-2CMXP7HKUVJN7L6M  tcp  --  *      *       0.0.0.0/0            10.0.0.120           /* default/nginx cluster IP */ tcp dpt:80
+    1    60 KUBE-SEP-JYRFZRKFGSU6GYGO  all  --  *      *       0.0.0.0/0            0.0.0.0/0            /* default/nginx */
+root@instance-1:~#
+![image](https://user-images.githubusercontent.com/59084432/118130205-bf813f00-b41a-11eb-80c4-f46b956332c2.png)
+
+```
