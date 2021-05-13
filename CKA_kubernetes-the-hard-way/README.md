@@ -132,15 +132,15 @@ run command kube-controller-manager
 
 root@instance-1:~# kube-controller-manager
 I0513 11:29:16.144625   27334 serving.go:331] Generated self-signed cert in-memory
-W0513 11:29:16.144872   27334 client_config.go:608] Neither --kubeconfig nor **--master** was specified.  Using the inClusterConfig.  This might not work.
+W0513 11:29:16.144872   27334 client_config.go:608] Neither --kubeconfig nor <mark>--master</mark>  specified.  Using the inClusterConfig.  This might not work.
 W0513 11:29:16.144983   27334 client_config.go:613] error creating inClusterConfig, falling back to default config: unable to load in-cluster configuration, KUBERNETES_SERVICE_HOST and KUBERNETES_SERVICE_PORT must be defined
 invalid configuration: no configuration has been provided, try setting KUBERNETES_MASTER environment variable
 
 
-if you see the above logs it a clearly **--master flag **required to run kube-controller-manager
+if you see the above logs it a clearly <mark>--master</mark> required to run kube-controller-manager
 
-**start kube-controller-manager**
-**kube-controller-manager --master=http://localhost:8080 or kube-controller-manager --master=localhost:8080**
+<mark>start kube-controller-manager</mark>
+kube-controller-manager --master=http://localhost:8080 or kube-controller-manager --master=localhost:8080
 
 
   
