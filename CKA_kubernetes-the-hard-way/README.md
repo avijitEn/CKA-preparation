@@ -132,16 +132,34 @@ run command kube-controller-manager
 
 root@instance-1:~# kube-controller-manager
 I0513 11:29:16.144625   27334 serving.go:331] Generated self-signed cert in-memory
-W0513 11:29:16.144872   27334 client_config.go:608] Neither --kubeconfig nor <mark>--master</mark>  specified.  Using the inClusterConfig.  This might not work.
+W0513 11:29:16.144872   27334 client_config.go:608] Neither --kubeconfig nor --master  specified.  Using the inClusterConfig.  This might not work.
 W0513 11:29:16.144983   27334 client_config.go:613] error creating inClusterConfig, falling back to default config: unable to load in-cluster configuration, KUBERNETES_SERVICE_HOST and KUBERNETES_SERVICE_PORT must be defined
 invalid configuration: no configuration has been provided, try setting KUBERNETES_MASTER environment variable
 
 
-if you see the above logs it a clearly <mark>--master</mark> required to run kube-controller-manager
+if you see the above logs it a clearly --master required to run kube-controller-manager
 
-<mark>start kube-controller-manager</mark>
+start kube-controller-manager
 kube-controller-manager --master=http://localhost:8080 or kube-controller-manager --master=localhost:8080
 
 
   
+```
+
+### kube-controller-manager
+```
+now if you run kubectl get all you can see deployment and ReplicaSet created but no POD created that mean  kube-controller-manager has create deployment and ReplicaSet correctly and check the log of kube-controller-manager you can see service account faild log reflelct it 
+
+let create the deployment object 
+kubectl create deploy nginx --image=nginx:alpine --replicas=3
+
+now check the resource , you will not find the resource because kube-controller-manager not deploy yet lets deploy   kube-controller-manager
+if you check kube-apiserver command flag --disable-admission-plugins strings by default enable , we have set trun it off by edit service account flag add  automountServiceAccountToken: false
+
+kubectl edit sa default
+
+add the line automountServiceAccountToken: false
+and save it 
+wait for sometime POD has created now  and it will show pending state 
+
 ```
