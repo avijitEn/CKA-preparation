@@ -272,4 +272,10 @@ kubelet --kubeconfig kubelet.kubeconfig
 
 ```
 now if you check the kubectl get node command it will reflect 1 cluster node registerd and POD now running state
+now you expose the deployment 
+kubectl expose deploy nginx --port 80
+
+now test curl <POD iP > working but curl not work service ip due to kube-proxy yet started lets start the kube-proxy
 ```
+
+
