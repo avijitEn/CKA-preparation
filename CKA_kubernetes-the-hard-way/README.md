@@ -262,3 +262,14 @@ kubectl config set-context default --cluster=kubernetes-the-hard-way --user=syst
 kubectl config use-context default --kubeconfig=kubelet.kubeconfig
 
 ```
+### start the kubelet 
+
+```
+kubelet --kubeconfig kubelet.kubeconfig
+```
+
+### kubelet describtion 
+
+```
+now if you check the kubectl get node command it will reflect 1 cluster node registerd and POD now running state
+```
