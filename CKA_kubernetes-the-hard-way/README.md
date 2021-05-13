@@ -194,3 +194,55 @@ let install the docker and kubelet
 
 ```
 
+### Docker install 
+
+```
+# Install Docker CE
+## Set up the repository:
+### Install packages to allow apt to use a repository over HTTPS
+apt-get update && apt-get install -y \
+  apt-transport-https ca-certificates curl software-properties-common gnupg2
+
+### Add Docker’s official GPG key
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+
+### Add Docker apt repository.
+add-apt-repository \
+  "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) \
+  stable"
+
+## Install Docker CE.
+apt-get update && apt-get install -y \
+  containerd.io=1.2.10-3 \
+  docker-ce=5:19.03.4~3-0~ubuntu-$(lsb_release -cs) \
+  docker-ce-cli=5:19.03.4~3-0~ubuntu-$(lsb_release -cs)
+
+
+# Restart docker.
+systemctl daemon-reload
+systemctl restart docker
+```
+
+### Configure the kubelet
+```
+Download the official Kubernetes release binaries:
+wget -q --show-progress --https-only --timestamping \
+  https://github.com/kubernetes-sigs/cri-tools/releases/download/v1.19.0/crictl-v1.21.0-linux-amd64.tar.gz \
+  https://github.com/opencontainers/runc/releases/download/v1.0.0-rc93/runc.amd64 \
+  https://github.com/containernetworking/plugins/releases/download/v0.9.1/cni-plugins-linux-amd64-v0.9.1.tgz \
+  https://github.com/containerd/containerd/releases/download/v1.4.4/containerd-1.4.4-linux-amd64.tar.gz \
+  https://storage.googleapis.com/kubernetes-release/release/v1.19.0/bin/linux/amd64/kubectl \
+  https://storage.googleapis.com/kubernetes-release/release/v1.19.0/bin/linux/amd64/kube-proxy \
+  https://storage.googleapis.com/kubernetes-release/release/v1.19.0/bin/linux/amd64/kubelet
+  
+
+```
+Install the kubelet binaries:
+
+```
+{
+  chmod +x kubelet  kube-proxy
+  sudo mv kubelet  kube-proxy /usr/local/bin/
+}
+```
