@@ -1,0 +1,712 @@
+Download and Install the etcd Binaries
+
+Download the official etcd release binaries from the etcd GitHub project:
+
+wget -q --show-progress --https-only --timestamping \
+  "https://github.com/etcd-io/etcd/releases/download/v3.4.15/etcd-v3.4.15-linux-amd64.tar.gz"
+
+Extract and install the etcd server and the etcdctl command line utility:
+
+{
+  tar -xvf etcd-v3.4.15-linux-amd64.tar.gz
+  sudo mv etcd-v3.4.15-linux-amd64/etcd* /usr/local/bin/
+}
+
+run the etcd command
+ advertise client URLs = http://localhost:2379
+ 
+ 
+ root@instance-1:~# etcd
+[WARNING] Deprecated '--logger=capnslog' flag is set; use '--logger=zap' flag instead
+2021-05-13 11:26:45.254665 I | etcdmain: etcd Version: 3.4.15
+2021-05-13 11:26:45.254851 I | etcdmain: Git SHA: aa7126864
+2021-05-13 11:26:45.254947 I | etcdmain: Go Version: go1.12.17
+2021-05-13 11:26:45.255034 I | etcdmain: Go OS/Arch: linux/amd64
+2021-05-13 11:26:45.255131 I | etcdmain: setting maximum number of CPUs to 1, total number of available CPUs is 1
+2021-05-13 11:26:45.255240 W | etcdmain: no data-dir provided, using default data-dir ./default.etcd
+2021-05-13 11:26:45.255404 N | etcdmain: the server is already initialized as member before, starting as etcd member...
+[WARNING] Deprecated '--logger=capnslog' flag is set; use '--logger=zap' flag instead
+2021-05-13 11:26:45.255972 I | embed: name = default
+2021-05-13 11:26:45.256086 I | embed: data dir = default.etcd
+2021-05-13 11:26:45.256183 I | embed: member dir = default.etcd/member
+2021-05-13 11:26:45.256273 I | embed: heartbeat = 100ms
+2021-05-13 11:26:45.256359 I | embed: election = 1000ms
+2021-05-13 11:26:45.256452 I | embed: snapshot count = 100000
+2021-05-13 11:26:45.256543 I | embed: advertise client URLs = http://localhost:2379
+2021-05-13 11:26:45.256635 I | embed: initial advertise peer URLs = http://localhost:2380
+2021-05-13 11:26:45.256734 I | embed: initial cluster =
+2021-05-13 11:26:45.325766 I | etcdserver: restarting member 8e9e05c52164694d in cluster cdf818194e3a8c32 at commit index 11177
+raft2021/05/13 11:26:45 INFO: 8e9e05c52164694d switched to configuration voters=()
+raft2021/05/13 11:26:45 INFO: 8e9e05c52164694d became follower at term 4
+raft2021/05/13 11:26:45 INFO: newRaft 8e9e05c52164694d [peers: [], term: 4, commit: 11177, applied: 0, lastindex: 11177, lastterm: 4]
+2021-05-13 11:26:45.329270 W | auth: simple token is not cryptographically signed
+2021-05-13 11:26:45.330831 I | mvcc: restore compact to 9146
+2021-05-13 11:26:45.335469 I | etcdserver: starting server... [version: 3.4.15, cluster version: to_be_decided]
+2021-05-13 11:26:45.337770 I | embed: listening for peers on 127.0.0.1:2380
+raft2021/05/13 11:26:45 INFO: 8e9e05c52164694d switched to configuration voters=(10276657743932975437)
+2021-05-13 11:26:45.338251 I | etcdserver/membership: added member 8e9e05c52164694d [http://localhost:2380] to cluster cdf818194e3a8c32
+2021-05-13 11:26:45.338405 N | etcdserver/membership: set the initial cluster version to 3.4
+2021-05-13 11:26:45.338521 I | etcdserver/api: enabled capabilities for version 3.4
+raft2021/05/13 11:26:46 INFO: 8e9e05c52164694d is starting a new election at term 4
+raft2021/05/13 11:26:46 INFO: 8e9e05c52164694d became candidate at term 5
+raft2021/05/13 11:26:46 INFO: 8e9e05c52164694d received MsgVoteResp from 8e9e05c52164694d at term 5
+raft2021/05/13 11:26:46 INFO: 8e9e05c52164694d became leader at term 5
+raft2021/05/13 11:26:46 INFO: raft.node: 8e9e05c52164694d elected leader 8e9e05c52164694d at term 5
+2021-05-13 11:26:46.331683 I | etcdserver: published {Name:default ClientURLs:[http://localhost:2379]} to cluster cdf818194e3a8c32
+2021-05-13 11:26:46.332033 I | embed: ready to serve client requests
+2021-05-13 11:26:46.332851 N | embed: serving insecure client requests on 127.0.0.1:2379, this is strongly discouraged!
+2021-05-13 11:27:28.282328 I | mvcc: store.index: compact 9809
+2021-05-13 11:27:28.283434 I | mvcc: finished scheduled compaction at 9809 (took 843.584µs)
+
+
+
+
+
+
+wget -q --show-progress --https-only --timestamping \
+  "https://storage.googleapis.com/kubernetes-release/release/v1.19.0/bin/linux/amd64/kube-apiserver" \
+  "https://storage.googleapis.com/kubernetes-release/release/v1.19.0/bin/linux/amd64/kube-controller-manager" \
+  "https://storage.googleapis.com/kubernetes-release/release/v1.19.0/bin/linux/amd64/kube-scheduler" \
+  "https://storage.googleapis.com/kubernetes-release/release/v1.19.0/bin/linux/amd64/kubectl"
+  
+  
+  
+  {
+  chmod +x kube-apiserver kube-controller-manager kube-scheduler kubectl
+  sudo mv kube-apiserver kube-controller-manager kube-scheduler kubectl /usr/local/bin/
+}
+
+
+
+root@instance-1:~# kube-controller-manager
+I0513 11:29:16.144625   27334 serving.go:331] Generated self-signed cert in-memory
+W0513 11:29:16.144872   27334 client_config.go:608] Neither --kubeconfig nor --master was specified.  Using the inClusterConfig.  This might not work.
+W0513 11:29:16.144983   27334 client_config.go:613] error creating inClusterConfig, falling back to default config: unable to load in-cluster configuration, KUBERNETES_SERVICE_HOST and KUBERNETES_SERVICE_PORT must be defined
+invalid configuration: no configuration has been provided, try setting KUBERNETES_MASTER environment variable
+root@instance-1:~# kube-scheduler
+I0513 11:29:24.012148   27400 registry.go:173] Registering SelectorSpread plugin
+I0513 11:29:24.012375   27400 registry.go:173] Registering SelectorSpread plugin
+I0513 11:29:24.899716   27400 serving.go:331] Generated self-signed cert in-memory
+W0513 11:29:25.162542   27400 authentication.go:265] No authentication-kubeconfig provided in order to lookup client-ca-file in configmap/extension-apiserver-authentication in kube-system, so client certificate authentication won't work.
+W0513 11:29:25.162796   27400 authentication.go:289] No authentication-kubeconfig provided in order to lookup requestheader-client-ca-file in configmap/extension-apiserver-authentication in kube-system, so request-header client certificate authentication won't work.
+W0513 11:29:25.162928   27400 authorization.go:146] No authorization-kubeconfig provided, so SubjectAccessReview of authorization tokens won't work.
+W0513 11:29:25.163025   27400 options.go:334] Neither --kubeconfig nor --master was specified. Using default API client. This might not work.
+invalid configuration: no configuration has been provided, try setting KUBERNETES_MASTER environment variable
+root@instance-1:~# kube-proxy
+W0513 11:29:33.384014   27472 server.go:226] WARNING: all flags other than --config, --write-config-to, and --cleanup are deprecated. Please begin using a config file ASAP.
+I0513 11:29:33.384443   27472 server.go:555] Neither kubeconfig file nor master URL was specified. Falling back to in-cluster config.
+F0513 11:29:33.384546   27472 server.go:495] unable to load in-cluster configuration, KUBERNETES_SERVICE_HOST and KUBERNETES_SERVICE_PORT must be defined
+root@instance-1:~# kubelet
+I0513 11:29:37.151729   27507 server.go:411] Version: v1.19.0
+W0513 11:29:37.152235   27507 server.go:553] standalone mode, no API client
+W0513 11:29:37.153972   27507 container_manager_linux.go:951] CPUAccounting not enabled for pid: 27507
+W0513 11:29:37.155668   27507 container_manager_linux.go:954] MemoryAccounting not enabled for pid: 27507
+W0513 11:29:37.155936   27507 container_manager_linux.go:951] CPUAccounting not enabled for pid: 7578
+W0513 11:29:37.156344   27507 container_manager_linux.go:954] MemoryAccounting not enabled for pid: 7578
+W0513 11:29:37.220098   27507 nvidia.go:61] NVIDIA GPU metrics will not be available: no NVIDIA devices found
+W0513 11:29:37.235393   27507 server.go:468] No api server defined - no events will be sent to API server.
+I0513 11:29:37.235716   27507 server.go:640] --cgroups-per-qos enabled, but --cgroup-root was not specified.  defaulting to /
+I0513 11:29:37.236180   27507 container_manager_linux.go:276] container manager verified user specified cgroup-root exists: []
+I0513 11:29:37.236392   27507 container_manager_linux.go:281] Creating Container Manager object based on Node Config: {RuntimeCgroupsName: SystemCgroupsName: KubeletCgroupsName: ContainerRuntime:docker CgroupsPerQOS:true CgroupRoot:/ CgroupDriver:cgroupfs KubeletRootDir:/var/lib/kubelet ProtectKernelDefaults:false NodeAllocatableConfig:{KubeReservedCgroupName: SystemReservedCgroupName: ReservedSystemCPUs: EnforceNodeAllocatable:map[pods:{}] KubeReserved:map[] SystemReserved:map[] HardEvictionThresholds:[{Signal:memory.available Operator:LessThan Value:{Quantity:100Mi Percentage:0} GracePeriod:0s MinReclaim:<nil>} {Signal:nodefs.available Operator:LessThan Value:{Quantity:<nil> Percentage:0.1} GracePeriod:0s MinReclaim:<nil>} {Signal:nodefs.inodesFree Operator:LessThan Value:{Quantity:<nil> Percentage:0.05} GracePeriod:0s MinReclaim:<nil>} {Signal:imagefs.available Operator:LessThan Value:{Quantity:<nil> Percentage:0.15} GracePeriod:0s MinReclaim:<nil>}]} QOSReserved:map[] ExperimentalCPUManagerPolicy:none ExperimentalCPUManagerReconcilePeriod:10s ExperimentalPodPidsLimit:-1 EnforceCPULimits:true CPUCFSQuotaPeriod:100ms ExperimentalTopologyManagerPolicy:none}
+I0513 11:29:37.236720   27507 topology_manager.go:126] [topologymanager] Creating topology manager with none policy
+I0513 11:29:37.236824   27507 container_manager_linux.go:311] [topologymanager] Initializing Topology Manager with none policy
+I0513 11:29:37.236910   27507 container_manager_linux.go:316] Creating device plugin manager: true
+I0513 11:29:37.237079   27507 client.go:77] Connecting to docker on unix:///var/run/docker.sock
+I0513 11:29:37.237187   27507 client.go:94] Start docker client with request timeout=2m0s
+W0513 11:29:37.243747   27507 docker_service.go:564] Hairpin mode set to "promiscuous-bridge" but kubenet is not enabled, falling back to "hairpin-veth"
+I0513 11:29:37.243918   27507 docker_service.go:241] Hairpin mode set to "hairpin-veth"
+W0513 11:29:37.244142   27507 cni.go:239] Unable to update cni config: no networks found in /etc/cni/net.d
+W0513 11:29:37.247994   27507 hostport_manager.go:71] The binary conntrack is not installed, this can cause failures in network connection cleanup.
+W0513 11:29:37.248150   27507 hostport_manager.go:71] The binary conntrack is not installed, this can cause failures in network connection cleanup.
+I0513 11:29:37.249398   27507 docker_service.go:256] Docker cri networking managed by kubernetes.io/no-op
+I0513 11:29:37.256666   27507 docker_service.go:261] Docker Info: &{ID:62SG:7TTM:7CWL:ERUH:PZL4:X7SO:CKZN:E3K2:DXMS:LEKJ:ESNH:WQ2R Containers:7 ContainersRunning:2 ContainersPaused:0 ContainersStopped:5 Images:2 Driver:overlay2 DriverStatus:[[Backing Filesystem extfs] [Supports d_type true] [Native Overlay Diff true]] SystemStatus:[] Plugins:{Volume:[local] Network:[bridge host ipvlan macvlan null overlay] Authorization:[] Log:[awslogs fluentd gcplogs gelf journald json-file local logentries splunk syslog]} MemoryLimit:true SwapLimit:false KernelMemory:true KernelMemoryTCP:true CPUCfsPeriod:true CPUCfsQuota:true CPUShares:true CPUSet:true PidsLimit:true IPv4Forwarding:true BridgeNfIptables:true BridgeNfIP6tables:true Debug:false NFd:36 OomKillDisable:true NGoroutines:47 SystemTime:2021-05-13T11:29:37.25029395Z LoggingDriver:json-file CgroupDriver:cgroupfs NEventsListener:0 KernelVersion:4.15.0-1098-gcp OperatingSystem:Ubuntu 16.04.7 LTS OSType:linux Architecture:x86_64 IndexServerAddress:https://index.docker.io/v1/ RegistryConfig:0xc0005b6e70 NCPU:1 MemTotal:1770438656 GenericResources:[] DockerRootDir:/var/lib/docker HTTPProxy: HTTPSProxy: NoProxy: Name:instance-1 Labels:[] ExperimentalBuild:false ServerVersion:19.03.4 ClusterStore: ClusterAdvertise: Runtimes:map[runc:{Path:runc Args:[]}] DefaultRuntime:runc Swarm:{NodeID: NodeAddr: LocalNodeState:inactive ControlAvailable:false Error: RemoteManagers:[] Nodes:0 Managers:0 Cluster:<nil> Warnings:[]} LiveRestoreEnabled:false Isolation: InitBinary:docker-init ContainerdCommit:{ID:b34a5c8af56e510852c35414db4c1f4fa6172339 Expected:b34a5c8af56e510852c35414db4c1f4fa6172339} RuncCommit:{ID:3e425f80a8c931f88e6d94a8c831b9d5aa481657 Expected:3e425f80a8c931f88e6d94a8c831b9d5aa481657} InitCommit:{ID:fec3683 Expected:fec3683} SecurityOptions:[name=apparmor name=seccomp,profile=default] ProductLicense: Warnings:[WARNING: No swap limit support]}
+I0513 11:29:37.257047   27507 docker_service.go:274] Setting cgroupDriver to cgroupfs
+I0513 11:29:37.271436   27507 remote_runtime.go:59] parsed scheme: ""
+I0513 11:29:37.271651   27507 remote_runtime.go:59] scheme "" not registered, fallback to default scheme
+I0513 11:29:37.271774   27507 passthrough.go:48] ccResolverWrapper: sending update to cc: {[{/var/run/dockershim.sock  <nil> 0 <nil>}] <nil> <nil>}
+I0513 11:29:37.271900   27507 clientconn.go:948] ClientConn switching balancer to "pick_first"
+I0513 11:29:37.272022   27507 remote_image.go:50] parsed scheme: ""
+I0513 11:29:37.272121   27507 remote_image.go:50] scheme "" not registered, fallback to default scheme
+I0513 11:29:37.272186   27507 passthrough.go:48] ccResolverWrapper: sending update to cc: {[{/var/run/dockershim.sock  <nil> 0 <nil>}] <nil> <nil>}
+I0513 11:29:37.272198   27507 clientconn.go:948] ClientConn switching balancer to "pick_first"
+E0513 11:29:37.523571   27507 aws_credentials.go:77] while getting AWS credentials NoCredentialProviders: no valid providers in chain. Deprecated.
+        For verbose messaging see aws.Config.CredentialsChainVerboseErrors
+I0513 11:29:37.533643   27507 kuberuntime_manager.go:214] Container runtime docker initialized, version: 19.03.4, apiVersion: 1.40.0
+W0513 11:29:37.533962   27507 volume_host.go:74] kubeClient is nil. Skip initialization of CSIDriverLister
+W0513 11:29:37.534281   27507 csi_plugin.go:188] kubernetes.io/csi: kubeclient not set, assuming standalone kubelet
+W0513 11:29:37.534453   27507 csi_plugin.go:258] Skipping CSINode initialization, kubelet running in standalone mode
+I0513 11:29:37.534831   27507 server.go:1147] Started kubelet
+E0513 11:29:37.535314   27507 kubelet.go:1218] Image garbage collection failed once. Stats initialization may not have completed yet: failed to get imageFs info: unable to find data in memory cache
+W0513 11:29:37.535333   27507 kubelet.go:1319] No api server defined - no node status update will be sent.
+I0513 11:29:37.537332   27507 fs_resource_analyzer.go:64] Starting FS ResourceAnalyzer
+E0513 11:29:37.537499   27507 server.go:788] Starting healthz server failed: listen tcp 127.0.0.1:10248: bind: address already in use
+F0513 11:29:37.536240   27507 server.go:182] listen tcp 0.0.0.0:10255: bind: address already in use
+goroutine 153 [running]:
+k8s.io/kubernetes/vendor/k8s.io/klog/v2.stacks(0xc000010001, 0xc0004183c0, 0x64, 0xb6)
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/klog/v2/klog.go:996 +0xb9
+k8s.io/kubernetes/vendor/k8s.io/klog/v2.(*loggingT).output(0x6cf6140, 0xc000000003, 0x0, 0x0, 0xc0005c87e0, 0x6b744ac, 0x9, 0xb6, 0x0)
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/klog/v2/klog.go:945 +0x191
+k8s.io/kubernetes/vendor/k8s.io/klog/v2.(*loggingT).printDepth(0x6cf6140, 0x3, 0x0, 0x0, 0x1, 0xc000bf9ec0, 0x1, 0x1)
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/klog/v2/klog.go:718 +0x165
+k8s.io/kubernetes/vendor/k8s.io/klog/v2.(*loggingT).print(...)
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/klog/v2/klog.go:703
+k8s.io/kubernetes/vendor/k8s.io/klog/v2.Fatal(...)
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/klog/v2/klog.go:1436
+k8s.io/kubernetes/pkg/kubelet/server.ListenAndServeKubeletReadOnlyServer(0x4ce19a0, 0xc00076aa80, 0x4c5bec0, 0xc000b38680, 0xc000b47910, 0x10, 0x10, 0x280f, 0x0)
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/pkg/kubelet/server/server.go:182 +0x3df
+k8s.io/kubernetes/pkg/kubelet.(*Kubelet).ListenAndServeReadOnly(0xc00076aa80, 0xc000b47910, 0x10, 0x10, 0x280f, 0xc00021c900)
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/pkg/kubelet/kubelet.go:2146 +0x87
+created by k8s.io/kubernetes/cmd/kubelet/app.startKubelet
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/cmd/kubelet/app/server.go:1163 +0x157
+
+goroutine 1 [select]:
+k8s.io/kubernetes/cmd/kubelet/app.run(0x4c5ba80, 0xc0006e7fc0, 0xc000566a00, 0xc00077f980, 0x7fb1f5b31480, 0xc000452980, 0xc000a3fae0, 0x1)
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/cmd/kubelet/app/server.go:800 +0xa78
+k8s.io/kubernetes/cmd/kubelet/app.Run(0x4c5ba80, 0xc0006e7fc0, 0xc000566a00, 0xc00077f980, 0x7fb1f5b31480, 0xc000452980, 0x58e6e6, 0x3cf35a0)
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/cmd/kubelet/app/server.go:415 +0x1ab
+k8s.io/kubernetes/cmd/kubelet/app.NewKubeletCommand.func1(0xc00024a2c0, 0xc00004e1c0, 0x0, 0x0)
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/cmd/kubelet/app/server.go:264 +0x5b5
+k8s.io/kubernetes/vendor/github.com/spf13/cobra.(*Command).execute(0xc00024a2c0, 0xc00004e1c0, 0x0, 0x0, 0xc00024a2c0, 0xc00004e1c0)
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/github.com/spf13/cobra/command.go:846 +0x2c2
+k8s.io/kubernetes/vendor/github.com/spf13/cobra.(*Command).ExecuteC(0xc00024a2c0, 0x167e9cda431541e7, 0x6cf5c60, 0x409b05)
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/github.com/spf13/cobra/command.go:950 +0x375
+k8s.io/kubernetes/vendor/github.com/spf13/cobra.(*Command).Execute(...)
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/github.com/spf13/cobra/command.go:887
+main.main()
+        _output/dockerized/go/src/k8s.io/kubernetes/cmd/kubelet/kubelet.go:41 +0xe5
+
+goroutine 6 [chan receive]:
+k8s.io/kubernetes/vendor/k8s.io/klog/v2.(*loggingT).flushDaemon(0x6cf6140)
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/klog/v2/klog.go:1131 +0x8b
+created by k8s.io/kubernetes/vendor/k8s.io/klog/v2.init.0
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/klog/v2/klog.go:416 +0xd8
+
+goroutine 84 [IO wait]:
+internal/poll.runtime_pollWait(0x7fb21f002ea8, 0x72, 0x4befde0)
+        /usr/local/go/src/runtime/netpoll.go:220 +0x55
+internal/poll.(*pollDesc).wait(0xc00066e218, 0x72, 0xc00012c000, 0x1000, 0x1000)
+        /usr/local/go/src/internal/poll/fd_poll_runtime.go:87 +0x45
+internal/poll.(*pollDesc).waitRead(...)
+        /usr/local/go/src/internal/poll/fd_poll_runtime.go:92
+internal/poll.(*FD).Read(0xc00066e200, 0xc00012c000, 0x1000, 0x1000, 0x0, 0x0, 0x0)
+        /usr/local/go/src/internal/poll/fd_unix.go:159 +0x1b1
+net.(*netFD).Read(0xc00066e200, 0xc00012c000, 0x1000, 0x1000, 0x43dcdc, 0xc000083b58, 0x46b060)
+        /usr/local/go/src/net/fd_posix.go:55 +0x4f
+net.(*conn).Read(0xc00073cba8, 0xc00012c000, 0x1000, 0x1000, 0x0, 0x0, 0x0)
+        /usr/local/go/src/net/net.go:182 +0x8e
+net/http.(*persistConn).Read(0xc00020d200, 0xc00012c000, 0x1000, 0x1000, 0xc0000a3d40, 0xc000083c58, 0x409095)
+        /usr/local/go/src/net/http/transport.go:1887 +0x77
+bufio.(*Reader).fill(0xc000033800)
+        /usr/local/go/src/bufio/bufio.go:101 +0x105
+bufio.(*Reader).Peek(0xc000033800, 0x1, 0x0, 0x0, 0x1, 0x0, 0xc0004cae40)
+        /usr/local/go/src/bufio/bufio.go:139 +0x4f
+net/http.(*persistConn).readLoop(0xc00020d200)
+        /usr/local/go/src/net/http/transport.go:2040 +0x1a8
+created by net/http.(*Transport).dialConn
+        /usr/local/go/src/net/http/transport.go:1708 +0xcb7
+
+goroutine 90 [chan receive]:
+k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/watch.(*Broadcaster).loop(0xc000452480)
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/watch/mux.go:207 +0x66
+created by k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/watch.NewBroadcaster
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/watch/mux.go:75 +0xce
+
+goroutine 81 [chan receive]:
+k8s.io/kubernetes/vendor/k8s.io/apiserver/pkg/server.SetupSignalContext.func1(0xc0008d3ec0)
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/apiserver/pkg/server/signal.go:48 +0x36
+created by k8s.io/kubernetes/vendor/k8s.io/apiserver/pkg/server.SetupSignalContext
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/apiserver/pkg/server/signal.go:47 +0xf3
+
+goroutine 48 [select]:
+k8s.io/kubernetes/vendor/go.opencensus.io/stats/view.(*worker).start(0xc000099b30)
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/go.opencensus.io/stats/view/worker.go:154 +0x105
+created by k8s.io/kubernetes/vendor/go.opencensus.io/stats/view.init.0
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/go.opencensus.io/stats/view/worker.go:32 +0x57
+
+goroutine 77 [select]:
+k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/util/wait.BackoffUntil(0x47934a0, 0x4bebc40, 0xc00021d890, 0x1, 0xc0000a20c0)
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/util/wait/wait.go:167 +0x149
+k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/util/wait.JitterUntil(0x47934a0, 0x12a05f200, 0x0, 0xc00001ac01, 0xc0000a20c0)
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/util/wait/wait.go:133 +0x98
+k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/util/wait.Until(...)
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/util/wait/wait.go:90
+k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/util/wait.Forever(0x47934a0, 0x12a05f200)
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/util/wait/wait.go:81 +0x4f
+created by k8s.io/kubernetes/vendor/k8s.io/component-base/logs.InitLogs
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/component-base/logs/logs.go:58 +0x8a
+
+goroutine 80 [syscall]:
+os/signal.signal_recv(0x0)
+        /usr/local/go/src/runtime/sigqueue.go:147 +0x9d
+os/signal.loop()
+        /usr/local/go/src/os/signal/signal_unix.go:23 +0x25
+created by os/signal.Notify.func1.1
+        /usr/local/go/src/os/signal/signal.go:150 +0x45
+
+goroutine 85 [select]:
+net/http.(*persistConn).writeLoop(0xc00020d200)
+        /usr/local/go/src/net/http/transport.go:2340 +0x11c
+created by net/http.(*Transport).dialConn
+        /usr/local/go/src/net/http/transport.go:1709 +0xcdc
+
+goroutine 88 [IO wait]:
+internal/poll.runtime_pollWait(0x7fb21f002dc8, 0x72, 0x4befde0)
+        /usr/local/go/src/runtime/netpoll.go:220 +0x55
+internal/poll.(*pollDesc).wait(0xc00066e918, 0x72, 0xc0005df000, 0x1000, 0x1000)
+        /usr/local/go/src/internal/poll/fd_poll_runtime.go:87 +0x45
+internal/poll.(*pollDesc).waitRead(...)
+        /usr/local/go/src/internal/poll/fd_poll_runtime.go:92
+internal/poll.(*FD).Read(0xc00066e900, 0xc0005df000, 0x1000, 0x1000, 0x0, 0x0, 0x0)
+        /usr/local/go/src/internal/poll/fd_unix.go:159 +0x1b1
+net.(*netFD).Read(0xc00066e900, 0xc0005df000, 0x1000, 0x1000, 0x43dcdc, 0xc000086b58, 0x46b060)
+        /usr/local/go/src/net/fd_posix.go:55 +0x4f
+net.(*conn).Read(0xc00073d2c0, 0xc0005df000, 0x1000, 0x1000, 0x0, 0x0, 0x0)
+        /usr/local/go/src/net/net.go:182 +0x8e
+net/http.(*persistConn).Read(0xc00091c6c0, 0xc0005df000, 0x1000, 0x1000, 0xc0004caa80, 0xc000086c58, 0x409095)
+        /usr/local/go/src/net/http/transport.go:1887 +0x77
+bufio.(*Reader).fill(0xc0003f6300)
+        /usr/local/go/src/bufio/bufio.go:101 +0x105
+bufio.(*Reader).Peek(0xc0003f6300, 0x1, 0x0, 0x0, 0x1, 0x0, 0xc0004cab40)
+        /usr/local/go/src/bufio/bufio.go:139 +0x4f
+net/http.(*persistConn).readLoop(0xc00091c6c0)
+        /usr/local/go/src/net/http/transport.go:2040 +0x1a8
+created by net/http.(*Transport).dialConn
+        /usr/local/go/src/net/http/transport.go:1708 +0xcb7
+
+goroutine 89 [select]:
+net/http.(*persistConn).writeLoop(0xc00091c6c0)
+        /usr/local/go/src/net/http/transport.go:2340 +0x11c
+created by net/http.(*Transport).dialConn
+        /usr/local/go/src/net/http/transport.go:1709 +0xcdc
+
+goroutine 91 [chan receive]:
+k8s.io/kubernetes/vendor/k8s.io/client-go/tools/record.(*eventBroadcasterImpl).StartEventWatcher.func1(0x4bfc500, 0xc000638a20, 0xc0005f2930)
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/client-go/tools/record/event.go:301 +0xaa
+created by k8s.io/kubernetes/vendor/k8s.io/client-go/tools/record.(*eventBroadcasterImpl).StartEventWatcher
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/client-go/tools/record/event.go:299 +0x6e
+
+goroutine 107 [IO wait]:
+internal/poll.runtime_pollWait(0x7fb21f002b28, 0x72, 0x0)
+        /usr/local/go/src/runtime/netpoll.go:220 +0x55
+internal/poll.(*pollDesc).wait(0xc00066f098, 0x72, 0x0, 0x0, 0x45e324c)
+        /usr/local/go/src/internal/poll/fd_poll_runtime.go:87 +0x45
+internal/poll.(*pollDesc).waitRead(...)
+        /usr/local/go/src/internal/poll/fd_poll_runtime.go:92
+internal/poll.(*FD).Accept(0xc00066f080, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0)
+        /usr/local/go/src/internal/poll/fd_unix.go:394 +0x1fc
+net.(*netFD).accept(0xc00066f080, 0xc000081d78, 0xc00065e400, 0x7fb21f17e108)
+        /usr/local/go/src/net/fd_unix.go:172 +0x45
+net.(*TCPListener).accept(0xc0002d2540, 0xc000081db8, 0x411b18, 0x30)
+        /usr/local/go/src/net/tcpsock_posix.go:139 +0x32
+net.(*TCPListener).Accept(0xc0002d2540, 0x4204b00, 0xc000953cb0, 0x3cc13a0, 0x6be1130)
+        /usr/local/go/src/net/tcpsock.go:261 +0x65
+net/http.(*Server).Serve(0xc0001d6d20, 0x4c57d00, 0xc0002d2540, 0x0, 0x0)
+        /usr/local/go/src/net/http/server.go:2937 +0x266
+k8s.io/kubernetes/pkg/kubelet/cri/streaming.(*server).Start(0xc000678900, 0x1, 0x9010be, 0x444bd6)
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/pkg/kubelet/cri/streaming/server.go:248 +0x14a
+k8s.io/kubernetes/pkg/kubelet/dockershim.(*dockerService).Start.func1(0xc0008d40b0)
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/pkg/kubelet/dockershim/docker_service.go:414 +0x3d
+created by k8s.io/kubernetes/pkg/kubelet/dockershim.(*dockerService).Start
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/pkg/kubelet/dockershim/docker_service.go:413 +0x86
+
+goroutine 93 [IO wait]:
+internal/poll.runtime_pollWait(0x7fb21f002ce8, 0x72, 0x4befde0)
+        /usr/local/go/src/runtime/netpoll.go:220 +0x55
+internal/poll.(*pollDesc).wait(0xc00066ec98, 0x72, 0xc00068f000, 0x1000, 0x1000)
+        /usr/local/go/src/internal/poll/fd_poll_runtime.go:87 +0x45
+internal/poll.(*pollDesc).waitRead(...)
+        /usr/local/go/src/internal/poll/fd_poll_runtime.go:92
+internal/poll.(*FD).Read(0xc00066ec80, 0xc00068f000, 0x1000, 0x1000, 0x0, 0x0, 0x0)
+        /usr/local/go/src/internal/poll/fd_unix.go:159 +0x1b1
+net.(*netFD).Read(0xc00066ec80, 0xc00068f000, 0x1000, 0x1000, 0x43dcdc, 0xc000977b58, 0x46b060)
+        /usr/local/go/src/net/fd_posix.go:55 +0x4f
+net.(*conn).Read(0xc00073d390, 0xc00068f000, 0x1000, 0x1000, 0x0, 0x0, 0x0)
+        /usr/local/go/src/net/net.go:182 +0x8e
+net/http.(*persistConn).Read(0xc00091d7a0, 0xc00068f000, 0x1000, 0x1000, 0xc0004cb380, 0xc000977c58, 0x409095)
+        /usr/local/go/src/net/http/transport.go:1887 +0x77
+bufio.(*Reader).fill(0xc00011a2a0)
+        /usr/local/go/src/bufio/bufio.go:101 +0x105
+bufio.(*Reader).Peek(0xc00011a2a0, 0x1, 0x0, 0x0, 0x1, 0x0, 0xc000cf22a0)
+        /usr/local/go/src/bufio/bufio.go:139 +0x4f
+net/http.(*persistConn).readLoop(0xc00091d7a0)
+        /usr/local/go/src/net/http/transport.go:2040 +0x1a8
+created by net/http.(*Transport).dialConn
+        /usr/local/go/src/net/http/transport.go:1708 +0xcb7
+
+goroutine 94 [select]:
+net/http.(*persistConn).writeLoop(0xc00091d7a0)
+        /usr/local/go/src/net/http/transport.go:2340 +0x11c
+created by net/http.(*Transport).dialConn
+        /usr/local/go/src/net/http/transport.go:1709 +0xcdc
+
+goroutine 108 [select]:
+k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/util/wait.BackoffUntil(0xc0008fb5f0, 0x4bebc40, 0xc000953ce0, 0xc00006a701, 0xc0000a20c0)
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/util/wait/wait.go:167 +0x149
+k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/util/wait.JitterUntil(0xc0008fb5f0, 0x45d964b800, 0x0, 0xc00006a701, 0xc0000a20c0)
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/util/wait/wait.go:133 +0x98
+k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/util/wait.Until(0xc0008fb5f0, 0x45d964b800, 0xc0000a20c0)
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/util/wait/wait.go:90 +0x4d
+created by k8s.io/kubernetes/pkg/kubelet/dockershim/cm.(*containerManager).Start
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/pkg/kubelet/dockershim/cm/container_manager_linux.go:84 +0xa5
+
+goroutine 109 [IO wait]:
+internal/poll.runtime_pollWait(0x7fb21f002968, 0x72, 0x0)
+        /usr/local/go/src/runtime/netpoll.go:220 +0x55
+internal/poll.(*pollDesc).wait(0xc00066ef18, 0x72, 0x0, 0x0, 0x45e324c)
+        /usr/local/go/src/internal/poll/fd_poll_runtime.go:87 +0x45
+internal/poll.(*pollDesc).waitRead(...)
+        /usr/local/go/src/internal/poll/fd_poll_runtime.go:92
+internal/poll.(*FD).Accept(0xc00066ef00, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0)
+        /usr/local/go/src/internal/poll/fd_unix.go:394 +0x1fc
+net.(*netFD).accept(0xc00066ef00, 0xc00073d6c0, 0x0, 0x0)
+        /usr/local/go/src/net/fd_unix.go:172 +0x45
+net.(*UnixListener).accept(0xc0009534a0, 0xc000082e38, 0xc000082e40, 0x18)
+        /usr/local/go/src/net/unixsock_posix.go:162 +0x32
+net.(*UnixListener).Accept(0xc0009534a0, 0x4791788, 0xc00068cc00, 0x4ca6be0, 0xc00073d6c0)
+        /usr/local/go/src/net/unixsock.go:260 +0x65
+k8s.io/kubernetes/vendor/google.golang.org/grpc.(*Server).Serve(0xc00068cc00, 0x4c57d40, 0xc0009534a0, 0x0, 0x0)
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/google.golang.org/grpc/server.go:597 +0x216
+k8s.io/kubernetes/pkg/kubelet/dockershim/remote.(*DockerServer).Start.func1(0xc000953440, 0x4c57d40, 0xc0009534a0)
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/pkg/kubelet/dockershim/remote/docker_server.go:74 +0x47
+created by k8s.io/kubernetes/pkg/kubelet/dockershim/remote.(*DockerServer).Start
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/pkg/kubelet/dockershim/remote/docker_server.go:73 +0x356
+
+goroutine 114 [select]:
+k8s.io/kubernetes/vendor/google.golang.org/grpc.(*ccBalancerWrapper).watcher(0xc000453dc0)
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/google.golang.org/grpc/balancer_conn_wrappers.go:69 +0xc8
+created by k8s.io/kubernetes/vendor/google.golang.org/grpc.newCCBalancerWrapper
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/google.golang.org/grpc/balancer_conn_wrappers.go:60 +0x172
+
+goroutine 112 [IO wait]:
+internal/poll.runtime_pollWait(0x7fb21f002c08, 0x72, 0x4befde0)
+        /usr/local/go/src/runtime/netpoll.go:220 +0x55
+internal/poll.(*pollDesc).wait(0xc00066f198, 0x72, 0xc0009ba000, 0x1000, 0x1000)
+        /usr/local/go/src/internal/poll/fd_poll_runtime.go:87 +0x45
+internal/poll.(*pollDesc).waitRead(...)
+        /usr/local/go/src/internal/poll/fd_poll_runtime.go:92
+internal/poll.(*FD).Read(0xc00066f180, 0xc0009ba000, 0x1000, 0x1000, 0x0, 0x0, 0x0)
+        /usr/local/go/src/internal/poll/fd_unix.go:159 +0x1b1
+net.(*netFD).Read(0xc00066f180, 0xc0009ba000, 0x1000, 0x1000, 0x43dcdc, 0xc000973b58, 0x46b060)
+        /usr/local/go/src/net/fd_posix.go:55 +0x4f
+net.(*conn).Read(0xc00073d610, 0xc0009ba000, 0x1000, 0x1000, 0x0, 0x0, 0x0)
+        /usr/local/go/src/net/net.go:182 +0x8e
+net/http.(*persistConn).Read(0xc0002fca20, 0xc0009ba000, 0x1000, 0x1000, 0xc0009bc000, 0xc000973c58, 0x409095)
+        /usr/local/go/src/net/http/transport.go:1887 +0x77
+bufio.(*Reader).fill(0xc000979320)
+        /usr/local/go/src/bufio/bufio.go:101 +0x105
+bufio.(*Reader).Peek(0xc000979320, 0x1, 0x0, 0x0, 0x1, 0x0, 0xc000ca6ea0)
+        /usr/local/go/src/bufio/bufio.go:139 +0x4f
+net/http.(*persistConn).readLoop(0xc0002fca20)
+        /usr/local/go/src/net/http/transport.go:2040 +0x1a8
+created by net/http.(*Transport).dialConn
+        /usr/local/go/src/net/http/transport.go:1708 +0xcb7
+
+goroutine 113 [select]:
+net/http.(*persistConn).writeLoop(0xc0002fca20)
+        /usr/local/go/src/net/http/transport.go:2340 +0x11c
+created by net/http.(*Transport).dialConn
+        /usr/local/go/src/net/http/transport.go:1709 +0xcdc
+
+goroutine 115 [chan receive]:
+k8s.io/kubernetes/vendor/google.golang.org/grpc.(*addrConn).resetTransport(0xc00093adc0)
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/google.golang.org/grpc/clientconn.go:1179 +0x709
+created by k8s.io/kubernetes/vendor/google.golang.org/grpc.(*addrConn).connect
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/google.golang.org/grpc/clientconn.go:815 +0x12a
+
+goroutine 116 [select]:
+k8s.io/kubernetes/vendor/google.golang.org/grpc.(*ccBalancerWrapper).watcher(0xc000453f40)
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/google.golang.org/grpc/balancer_conn_wrappers.go:69 +0xc8
+created by k8s.io/kubernetes/vendor/google.golang.org/grpc.newCCBalancerWrapper
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/google.golang.org/grpc/balancer_conn_wrappers.go:60 +0x172
+
+goroutine 117 [chan receive]:
+k8s.io/kubernetes/vendor/google.golang.org/grpc.(*addrConn).resetTransport(0xc00093b080)
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/google.golang.org/grpc/clientconn.go:1179 +0x709
+created by k8s.io/kubernetes/vendor/google.golang.org/grpc.(*addrConn).connect
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/google.golang.org/grpc/clientconn.go:815 +0x12a
+
+goroutine 135 [IO wait]:
+internal/poll.runtime_pollWait(0x7fb21f002348, 0x72, 0x4befde0)
+        /usr/local/go/src/runtime/netpoll.go:220 +0x55
+internal/poll.(*pollDesc).wait(0xc000534798, 0x72, 0xc0009c1000, 0x1000, 0x1000)
+        /usr/local/go/src/internal/poll/fd_poll_runtime.go:87 +0x45
+internal/poll.(*pollDesc).waitRead(...)
+        /usr/local/go/src/internal/poll/fd_poll_runtime.go:92
+internal/poll.(*FD).Read(0xc000534780, 0xc0009c1000, 0x1000, 0x1000, 0x0, 0x0, 0x0)
+        /usr/local/go/src/internal/poll/fd_unix.go:159 +0x1b1
+net.(*netFD).Read(0xc000534780, 0xc0009c1000, 0x1000, 0x1000, 0x43dcdc, 0xc000b03b58, 0x46b060)
+        /usr/local/go/src/net/fd_posix.go:55 +0x4f
+net.(*conn).Read(0xc00073dbb0, 0xc0009c1000, 0x1000, 0x1000, 0x0, 0x0, 0x0)
+        /usr/local/go/src/net/net.go:182 +0x8e
+net/http.(*persistConn).Read(0xc000246ea0, 0xc0009c1000, 0x1000, 0x1000, 0xc0009bd740, 0xc000b03c58, 0x409095)
+        /usr/local/go/src/net/http/transport.go:1887 +0x77
+bufio.(*Reader).fill(0xc000b84720)
+        /usr/local/go/src/bufio/bufio.go:101 +0x105
+bufio.(*Reader).Peek(0xc000b84720, 0x1, 0x0, 0x0, 0x1, 0x0, 0xc0009bde60)
+        /usr/local/go/src/bufio/bufio.go:139 +0x4f
+net/http.(*persistConn).readLoop(0xc000246ea0)
+        /usr/local/go/src/net/http/transport.go:2040 +0x1a8
+created by net/http.(*Transport).dialConn
+        /usr/local/go/src/net/http/transport.go:1708 +0xcb7
+
+goroutine 119 [IO wait]:
+internal/poll.runtime_pollWait(0x7fb21f0027a8, 0x72, 0x4befde0)
+        /usr/local/go/src/runtime/netpoll.go:220 +0x55
+internal/poll.(*pollDesc).wait(0xc00066fb18, 0x72, 0xc0009c8000, 0x8000, 0x8000)
+        /usr/local/go/src/internal/poll/fd_poll_runtime.go:87 +0x45
+internal/poll.(*pollDesc).waitRead(...)
+        /usr/local/go/src/internal/poll/fd_poll_runtime.go:92
+internal/poll.(*FD).Read(0xc00066fb00, 0xc0009c8000, 0x8000, 0x8000, 0x0, 0x0, 0x0)
+        /usr/local/go/src/internal/poll/fd_unix.go:159 +0x1b1
+net.(*netFD).Read(0xc00066fb00, 0xc0009c8000, 0x8000, 0x8000, 0xb4115e, 0x800000601, 0x0)
+        /usr/local/go/src/net/fd_posix.go:55 +0x4f
+net.(*conn).Read(0xc00073d6a8, 0xc0009c8000, 0x8000, 0x8000, 0x0, 0x0, 0x0)
+        /usr/local/go/src/net/net.go:182 +0x8e
+bufio.(*Reader).Read(0xc000979c80, 0xc0001d6e38, 0x9, 0x9, 0x20, 0x18, 0x3f7e7a0)
+        /usr/local/go/src/bufio/bufio.go:227 +0x222
+io.ReadAtLeast(0x4be5a00, 0xc000979c80, 0xc0001d6e38, 0x9, 0x9, 0x9, 0x100000000b27b05, 0x0, 0x9)
+        /usr/local/go/src/io/io.go:314 +0x87
+io.ReadFull(...)
+        /usr/local/go/src/io/io.go:333
+k8s.io/kubernetes/vendor/golang.org/x/net/http2.readFrameHeader(0xc0001d6e38, 0x9, 0x9, 0x4be5a00, 0xc000979c80, 0x0, 0xc000000000, 0x411b18, 0xc0006f9af0)
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/golang.org/x/net/http2/frame.go:237 +0x89
+k8s.io/kubernetes/vendor/golang.org/x/net/http2.(*Framer).ReadFrame(0xc0001d6e00, 0xc000cda5e0, 0xc000cda5e0, 0x0, 0x0)
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/golang.org/x/net/http2/frame.go:492 +0xa5
+k8s.io/kubernetes/vendor/google.golang.org/grpc/internal/transport.(*http2Client).reader(0xc0009516c0)
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/google.golang.org/grpc/internal/transport/http2_client.go:1265 +0x179
+created by k8s.io/kubernetes/vendor/google.golang.org/grpc/internal/transport.newHTTP2Client
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/google.golang.org/grpc/internal/transport/http2_client.go:300 +0xd31
+
+goroutine 120 [select]:
+k8s.io/kubernetes/vendor/google.golang.org/grpc/internal/transport.(*controlBuffer).get(0xc0006f9ae0, 0x1, 0x0, 0x0, 0x0, 0x0)
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/google.golang.org/grpc/internal/transport/controlbuf.go:395 +0x125
+k8s.io/kubernetes/vendor/google.golang.org/grpc/internal/transport.(*loopyWriter).run(0xc000979d40, 0x0, 0x0)
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/google.golang.org/grpc/internal/transport/controlbuf.go:513 +0x1d3
+k8s.io/kubernetes/vendor/google.golang.org/grpc/internal/transport.newHTTP2Client.func3(0xc0009516c0)
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/google.golang.org/grpc/internal/transport/http2_client.go:346 +0x7b
+created by k8s.io/kubernetes/vendor/google.golang.org/grpc/internal/transport.newHTTP2Client
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/google.golang.org/grpc/internal/transport/http2_client.go:344 +0xefc
+
+goroutine 121 [IO wait]:
+internal/poll.runtime_pollWait(0x7fb21f0026c8, 0x72, 0x4befde0)
+        /usr/local/go/src/runtime/netpoll.go:220 +0x55
+internal/poll.(*pollDesc).wait(0xc0003b4718, 0x72, 0xc0009e0000, 0x8000, 0x8000)
+        /usr/local/go/src/internal/poll/fd_poll_runtime.go:87 +0x45
+internal/poll.(*pollDesc).waitRead(...)
+        /usr/local/go/src/internal/poll/fd_poll_runtime.go:92
+internal/poll.(*FD).Read(0xc0003b4700, 0xc0009e0000, 0x8000, 0x8000, 0x0, 0x0, 0x0)
+        /usr/local/go/src/internal/poll/fd_unix.go:159 +0x1b1
+net.(*netFD).Read(0xc0003b4700, 0xc0009e0000, 0x8000, 0x8000, 0xc000ba3798, 0xc000976d48, 0x14c0845)
+        /usr/local/go/src/net/fd_posix.go:55 +0x4f
+net.(*conn).Read(0xc00073d6b0, 0xc0009e0000, 0x8000, 0x8000, 0x0, 0x0, 0x0)
+        /usr/local/go/src/net/net.go:182 +0x8e
+bufio.(*Reader).Read(0xc000979ec0, 0xc0001d6f18, 0x9, 0x9, 0x4bf7601, 0x1000500c8, 0x0)
+        /usr/local/go/src/bufio/bufio.go:227 +0x222
+io.ReadAtLeast(0x4be5a00, 0xc000979ec0, 0xc0001d6f18, 0x9, 0x9, 0x9, 0xc000ce8af0, 0x0, 0x4b1ae85)
+        /usr/local/go/src/io/io.go:314 +0x87
+io.ReadFull(...)
+        /usr/local/go/src/io/io.go:333
+k8s.io/kubernetes/vendor/golang.org/x/net/http2.readFrameHeader(0xc0001d6f18, 0x9, 0x9, 0x4be5a00, 0xc000979ec0, 0x0, 0x0, 0x0, 0x0)
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/golang.org/x/net/http2/frame.go:237 +0x89
+k8s.io/kubernetes/vendor/golang.org/x/net/http2.(*Framer).ReadFrame(0xc0001d6ee0, 0xc000ce1770, 0xc000ce1770, 0x0, 0x0)
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/golang.org/x/net/http2/frame.go:492 +0xa5
+k8s.io/kubernetes/vendor/google.golang.org/grpc/internal/transport.(*http2Client).reader(0xc000951880)
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/google.golang.org/grpc/internal/transport/http2_client.go:1265 +0x179
+created by k8s.io/kubernetes/vendor/google.golang.org/grpc/internal/transport.newHTTP2Client
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/google.golang.org/grpc/internal/transport/http2_client.go:300 +0xd31
+
+goroutine 122 [select]:
+k8s.io/kubernetes/vendor/google.golang.org/grpc/internal/transport.(*controlBuffer).get(0xc0006f9c70, 0x1, 0x0, 0x0, 0x0, 0x0)
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/google.golang.org/grpc/internal/transport/controlbuf.go:395 +0x125
+k8s.io/kubernetes/vendor/google.golang.org/grpc/internal/transport.(*loopyWriter).run(0xc0009fa0c0, 0x0, 0x0)
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/google.golang.org/grpc/internal/transport/controlbuf.go:513 +0x1d3
+k8s.io/kubernetes/vendor/google.golang.org/grpc/internal/transport.newHTTP2Client.func3(0xc000951880)
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/google.golang.org/grpc/internal/transport/http2_client.go:346 +0x7b
+created by k8s.io/kubernetes/vendor/google.golang.org/grpc/internal/transport.newHTTP2Client
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/google.golang.org/grpc/internal/transport/http2_client.go:344 +0xefc
+
+goroutine 143 [chan receive]:
+k8s.io/kubernetes/pkg/kubelet/images.(*serialImagePuller).processImagePullRequests(0xc000b39d20)
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/pkg/kubelet/images/puller.go:88 +0x185
+k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/util/wait.BackoffUntil.func1(0xc000bcf780)
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/util/wait/wait.go:155 +0x5f
+k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/util/wait.BackoffUntil(0xc000bcf780, 0x4bebc40, 0xc000b8bce0, 0xc00006bf01, 0xc0000a20c0)
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/util/wait/wait.go:156 +0xad
+k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/util/wait.JitterUntil(0xc000bcf780, 0x3b9aca00, 0x0, 0xc0006f9f01, 0xc0000a20c0)
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/util/wait/wait.go:133 +0x98
+k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/util/wait.Until(0xc000bcf780, 0x3b9aca00, 0xc0000a20c0)
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/util/wait/wait.go:90 +0x4d
+created by k8s.io/kubernetes/pkg/kubelet/images.newSerialImagePuller
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/pkg/kubelet/images/puller.go:67 +0xe8
+
+goroutine 128 [select]:
+k8s.io/kubernetes/vendor/google.golang.org/grpc/internal/transport.(*controlBuffer).get(0xc0006f9ef0, 0x1, 0x0, 0x0, 0x0, 0x0)
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/google.golang.org/grpc/internal/transport/controlbuf.go:395 +0x125
+k8s.io/kubernetes/vendor/google.golang.org/grpc/internal/transport.(*loopyWriter).run(0xc0009fa5a0, 0x0, 0x0)
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/google.golang.org/grpc/internal/transport/controlbuf.go:513 +0x1d3
+k8s.io/kubernetes/vendor/google.golang.org/grpc/internal/transport.newHTTP2Server.func2(0xc0009f8a80)
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/google.golang.org/grpc/internal/transport/http2_server.go:296 +0xd7
+created by k8s.io/kubernetes/vendor/google.golang.org/grpc/internal/transport.newHTTP2Server
+        /workspace/anago-v1.19.0-rc.4.197+594f888e19d8da/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/google.golang.org/grpc/internal/transport/http2_server.go:293 +0x10d6
+
+
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: build-robot
+automountServiceAccountToken: false
+...
+
+wget -q --show-progress --https-only --timestamping \
+  https://github.com/kubernetes-sigs/cri-tools/releases/download/v1.19.0/crictl-v1.21.0-linux-amd64.tar.gz \
+  https://github.com/opencontainers/runc/releases/download/v1.0.0-rc93/runc.amd64 \
+  https://github.com/containernetworking/plugins/releases/download/v0.9.1/cni-plugins-linux-amd64-v0.9.1.tgz \
+  https://github.com/containerd/containerd/releases/download/v1.4.4/containerd-1.4.4-linux-amd64.tar.gz \
+  https://storage.googleapis.com/kubernetes-release/release/v1.19.0/bin/linux/amd64/kubectl \
+  https://storage.googleapis.com/kubernetes-release/release/v1.19.0/bin/linux/amd64/kube-proxy \
+  https://storage.googleapis.com/kubernetes-release/release/v1.19.0/bin/linux/amd64/kubelet
+  
+  
+  
+  
+  Docker 
+  
+  
+# Install Docker CE
+## Set up the repository:
+### Install packages to allow apt to use a repository over HTTPS
+apt-get update && apt-get install -y \
+  apt-transport-https ca-certificates curl software-properties-common gnupg2
+
+### Add Docker’s official GPG key
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+
+### Add Docker apt repository.
+add-apt-repository \
+  "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) \
+  stable"
+
+## Install Docker CE.
+apt-get update && apt-get install -y \
+  containerd.io=1.2.10-3 \
+  docker-ce=5:19.03.4~3-0~ubuntu-$(lsb_release -cs) \
+  docker-ce-cli=5:19.03.4~3-0~ubuntu-$(lsb_release -cs)
+
+
+# Restart docker.
+systemctl daemon-reload
+systemctl restart docker
+  
+  
+  kubert
+  
+  
+  kubectl config set-cluster kubernetes-the-hard-way --server=http://localhost:8080 --kubeconfig=kubelet.kubeconfig
+
+  kubectl config set-context default --cluster=kubernetes-the-hard-way --user=system:node:instance-1 --kubeconfig=kubelet.kubeconfig
+
+  kubectl config use-context default --kubeconfig=kubelet.kubeconfig
+  
+  
+  
+  
+  
+  
+  root@instance-1:~# history
+    1  exit
+    2  kube-apiserver
+    3  kube-apiserver --etcd-servers http://localhost:2379
+    4  kube-apiserver
+    5  kube-apiserver --help
+    6  exit
+    7  kubectl get all
+    8  alias k=kubectl
+    9  k get po
+   10  k describe no
+   11  k get po
+   12  k describe po
+   13  wget -q --show-progress --https-only --timestamping   https://github.com/kubernetes-sigs/cri-tools/releases/download/v1.21.0/crictl-v1.21.0-linux-amd64.tar.gz   https://github.com/opencontainers/runc/releases/download/v1.0.0-rc93/runc.amd64   https://github.com/containernetworking/plugins/releases/download/v0.9.1/cni-plugins-linux-amd64-v0.9.1.tgz   https://github.com/containerd/containerd/releases/download/v1.4.4/containerd-1.4.4-linux-amd64.tar.gz   https://storage.googleapis.com/kubernetes-release/release/v1.21.0/bin/linux/amd64/kubectl   https://storage.googleapis.com/kubernetes-release/release/v1.21.0/bin/linux/amd64/kube-proxy   https://storage.googleapis.com/kubernetes-release/release/v1.21.0/bin/linux/amd64/kubelet
+   14  mv kubelet /usr/local/bin/
+   15  kubelet
+   16  chmod +x /usr/local/bin/kubelet
+   17  kubelet
+   18  ll
+   19  kubelet --help
+   19  kubelet --help|grep kubeconfig
+   21  kubelet --help|grep config
+   22  ll
+   23  kubelet --kubeconfig kubelet.kubeconfig
+   24  cat kubelet.kubeconfig
+   25  kubectl config set-cluster kubernetes-the-hard-way
+   26  cat kubelet.kubeconfig
+   27  kubelet --kubeconfig kubelet.kubeconfig
+   28  apt-get update && apt-get install -y   apt-transport-https ca-certificates curl software-properties-common gnupg2
+   29  clear
+   30  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+   31  lsb_release -cs
+   32  add-apt-repository   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   33    $(lsb_release -cs) \
+   34    stable"
+   35  apt-get update
+   36  apt-cache
+   37  apt-cache policy docker-ce
+   38  apt-get update && apt-get install -y   containerd.io=1.2.10-3   docker-ce=5:19.03.4~3-0~ubuntu-$(lsb_release -cs)   docker-ce-cli=5:19.03.4~3-0~ubuntu-$(lsb_release -cs)
+   39  systemctl daemon-reload
+   40  systemctl restart docker
+   41  dockerd
+   42  ll
+   43  kubelet --kubeconfig kubelet.kubeconfig
+   44  kubectl get po
+   45  k get deploy
+   46  alais k=kubectl
+   47  alias k=kubectl
+   48  k get deploy
+   49  k scale deploy nginx --replicas=1
+   50  k get po
+   51  k get po -o wide
+   52  curl http://172.17.0.4:80
+   53  ll
+   54  k expode deploy nginx --port 80
+   55  k expose deploy nginx --port 80
+   56  k get svc
+   57  curl http://10.0.0.224:80
+   58  ll
+   59  cd /usr/local/bin/
+   60  ll
+   61  cd ..
+   62  ll
+   63  cd ..
+   64  ll
+   65  cd /root/
+   66  ll
+   67  wget -q --show-progress --https-only --timestamping   https://github.com/kubernetes-sigs/cri-tools/releases/download/v1.21.0/crictl-v1.21.0-linux-amd64.tar.gz   https://github.com/opencontainers/runc/releases/download/v1.0.0-rc93/runc.amd64   https://github.com/containernetworking/plugins/releases/download/v0.9.1/cni-plugins-linux-amd64-v0.9.1.tgz   https://github.com/containerd/containerd/releases/download/v1.4.4/containerd-1.4.4-linux-amd64.tar.gz   https://storage.googleapis.com/kubernetes-release/release/v1.21.0/bin/linux/amd64/kubectl   https://storage.googleapis.com/kubernetes-release/release/v1.21.0/bin/linux/amd64/kube-proxy   https://storage.googleapis.com/kubernetes-release/release/v1.19.0/bin/linux/amd64/kubelet
+   68  ll
+   69  chmod +x kube-proxy
+   70  ll
+   71  mv kube-proxy /usr/local/bin/
+   72  kube-proxy
+   73  kube-proxy --master http://localhost:8080
+   74  wget -q --show-progress --https-only --timestamping   https://github.com/kubernetes-sigs/cri-tools/releases/download/v1.21.0/crictl-v1.21.0-linux-amd64.tar.gz   https://github.com/opencontainers/runc/releases/download/v1.0.0-rc93/runc.amd64   https://github.com/containernetworking/plugins/releases/download/v0.9.1/cni-plugins-linux-amd64-v0.9.1.tgz   https://github.com/containerd/containerd/releases/download/v1.4.4/containerd-1.4.4-linux-amd64.tar.gz   https://storage.googleapis.com/kubernetes-release/release/v1.21.0/bin/linux/amd64/kubectl   https://storage.googleapis.com/kubernetes-release/release/v1.19.0/bin/linux/amd64/kube-proxy   https://storage.googleapis.com/kubernetes-release/release/v1.19.0/bin/linux/amd64/kubelet
+   75  chmod +x kube-proxy
+   76  mv kube-proxy /usr/local/bin/
+   77  kube-proxy --master http://localhost:8080
+   78  history
+root@instance-1:~#
+
+kube-scheduler --master=http://localhost:8080
+
+kube-controller-manager --master=http://localhost:8080
+
+
+kubectl config set-cluster kubernetes-the-hard-way --server=http://127.0.0.1:8080 --kubeconfig=kube.kubeconfig
+
+
+
+  kubectl config set-context default \
+    --cluster=kubernetes-the-hard-way \
+    --user=system:node:instance-1 \
+    --kubeconfig=kube.kubeconfig
+
+  kubectl config use-context default --kubeconfig=kube.kubeconfig
+
