@@ -33,7 +33,7 @@ run command to start etcd daemon
 sudo etcd
   
 ```
-### bind log etcd Server
+### bind log etcd Server and verify advertise client URLs
 
 ```
  root@instance-1:~# etcd
