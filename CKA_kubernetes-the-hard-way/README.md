@@ -1,6 +1,6 @@
 # Prerequisites
 
-## Google Cloud Platform or any cloud infratructure with 2 vCPU and 2GB RAM assign to regired VM
+## cloud infratructure with 2 vCPU and 2GB RAM assign to regired VM
 
  # Provisioning a CA and Generating TLS Certificates expicit in this lab
 
