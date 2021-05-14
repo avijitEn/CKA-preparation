@@ -44,6 +44,8 @@ Make a request to the hello-web:8080 endpoint to verify that the incoming traffi
 
 ```
 wget -qO- --timeout=2 http://hello-web:8080
+
+kubectl run -l app=foo --image=alpine --restart=Never --rm -i -t test-1 -- wget -qO- --timeout=2 http://hello-web:8080
 ```
 
 Traffic from Pod app=foo to the app=hello Pods is enabled.
