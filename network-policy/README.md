@@ -107,7 +107,7 @@ Validate the egress policy
 First, deploy a new web application called hello-web-2 and expose it internally in the cluster:
 
 ```
-kubectl run hello-web-2 --labels app=hello-2 \
+kubectl run hello-web-2 --labels app=hello \
   --image=gcr.io/google-samples/hello-app:1.0 --port 8080 --expose
 ```
 Next, run a temporary Pod with the label app=foo and open a shell inside the container:
