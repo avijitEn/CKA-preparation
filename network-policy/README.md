@@ -60,6 +60,8 @@ Make the same request to observe that the traffic is not allowed and therefore t
 
 ```
 wget -qO- --timeout=2 http://hello-web:8080
+
+kubectl run -l app=other --image=alpine --restart=Never --rm -i -t test-1 -- wget -qO- --timeout=2 http://hello-web:8080
 ```
 
 -------------------------------
