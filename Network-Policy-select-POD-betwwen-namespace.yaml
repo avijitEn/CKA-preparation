@@ -1,0 +1,38 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+   name: isolate-namespace
+   namespace: org-1
+spec:
+  podSelector: {}
+  policyTypes:
+   - Ingress
+   - Egress
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          name: team-a
+    - namespaceSelector:
+       matchLabels:
+         name: team-b
+    ports:
+      - port: 80
+        protocol: TCP
+  egress:
+  - to:
+    - namespaceSelector:
+        matchLabels:
+         name: team-a
+    - podSelector:
+        matchLabels:
+          app: team-b
+    ports:
+      - port: 80
+        protocol: TCP
+     
+  - ports:
+     - port: 53
+       protocol: TCP
+     - port: 53
+       protocol: UDP
