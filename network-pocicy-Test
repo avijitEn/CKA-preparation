@@ -1,0 +1,24 @@
+k create ns org-1
+k create ns org-2
+k label ns org-1 name=team-a
+k label ns org-2 name=team-b
+
+k -n org-1 run team-a --image nginx:alpine -l app=team-a --port 80 --expose
+
+k -n org-2 run team-b --image nginx:alpine -l app=team-b --port 80 --expose
+k -n org-2 run team-d --image nginx:alpine -l app=team-b --port 80 --expose
+
+k -n org-1 run team-c --image nginx:alpine -l app=team-b --port 80 --expose
+
+
+### verify the network policy
+
+k -n org-2 exec team-b -- wget -qO- team-a.org-1
+
+k -n org-2 exec team-b -- wget -qO- team-a.org-1
+k -n org-2 exec team-d -- wget -qO- team-a.org-1
+k -n org-2 exec team-10 -- wget -qO- team-a.org-1
+
+k -n org-1 exec team-a -- wget -qO- team-b.org-2
+k -n org-1 exec team-c -- wget -qO- team-a
+k -n org-1 exec team-c -- wget -qO- team-b.org-2
